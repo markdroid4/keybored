@@ -28,15 +28,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String mode = modePiano;
   static const String modePiano = 'piano';
-  static String modeDrums = 'drums';
-  static String modeDog = 'dog';
-  static String modeSilly = 'silly';
+  static const String modeDrums = 'drums';
+  static const String modeSilly = 'silly';
 
   @override
   Widget build(BuildContext context) {
     void playSound(int num) {
       final player = AudioCache();
-      player.play('$num.mp3');
+      print('playing $mode/$num.mp3');
+      player.play('$mode/$num.mp3');
     }
 
     Widget buildKey(int num, Color c) {
@@ -64,6 +64,44 @@ class _MyHomePageState extends State<MyHomePage> {
             buildKey(6, Colors.yellowAccent),
             buildKey(7, Colors.indigoAccent),
             buildKey(8, Colors.red),
+            Row(children: [
+              Expanded(
+                child: TextButton(
+                  child: Container(
+                    child: Icon(Icons.audiotrack, semanticLabel: 'Piano'),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      mode = modePiano;
+                    });
+                  },
+                ),
+              ),
+              Expanded(
+                child: TextButton(
+                  child: Container(
+                    child: Icon(Icons.bubble_chart, semanticLabel: 'Drums'),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      mode = modeDrums;
+                    });
+                  },
+                ),
+              ),
+              Expanded(
+                child: TextButton(
+                  child: Container(
+                    child: Icon(Icons.child_care, semanticLabel: 'Silly'),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      mode = modeSilly;
+                    });
+                  },
+                ),
+              ),
+            ])
           ],
         ),
       ),
